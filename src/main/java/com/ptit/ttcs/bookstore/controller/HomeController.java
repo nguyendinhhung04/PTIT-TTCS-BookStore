@@ -1,4 +1,4 @@
-package com.ptit.ttcs.bookstore;
+package com.ptit.ttcs.bookstore.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
