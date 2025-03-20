@@ -3,6 +3,7 @@ package com.ptit.ttcs.bookstore.service;
 
 import com.ptit.ttcs.bookstore.domain.User;
 import com.ptit.ttcs.bookstore.repository.UserRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public class UserService {
 
     public User findUserById(Long id) {
         return this.userRepository.findById(id).orElse(null);
+    }
+
+    public User saveUser(User user) {
+        return this.userRepository.save(user);
     }
 }
