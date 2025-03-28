@@ -1,6 +1,5 @@
 package com.ptit.ttcs.bookstore.service;
 
-
 import com.ptit.ttcs.bookstore.domain.User;
 import com.ptit.ttcs.bookstore.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
