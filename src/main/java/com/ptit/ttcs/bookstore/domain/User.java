@@ -12,8 +12,11 @@ public class User {
     String email;
     String password;
     String fullname;
-    String address;
+    Integer age;
+    String gender;
     String phone;
+    String address;
+
 
 
     public void setId(Long id) {
@@ -64,14 +67,38 @@ public class User {
         return this.password;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public void UserAdded() {
 
     }
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullname
-                + ", address=" + address + ", phone=" + phone + "]";
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
 

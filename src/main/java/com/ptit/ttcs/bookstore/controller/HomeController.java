@@ -34,6 +34,17 @@ public class HomeController {
         System.out.println("Access form frontend");
         return userService.findAllUser();
     }
+
+    @GetMapping("/admin/user/detail/{id}")
+    public User  viewDetailUser(@PathVariable("id") Long id) {
+        System.out.println(id);
+        System.out.println(userService.findUserById(id));
+        return userService.findUserById(id);
+
+    }
+
+
+
 }
 
 
