@@ -29,6 +29,8 @@ public class HomeController {
         userService.saveUser(user);
     }
 
+
+
     @GetMapping("/admin/user/view")
     public List<User> viewUser() {
         System.out.println("Access form frontend");
@@ -40,10 +42,12 @@ public class HomeController {
         System.out.println(id);
         System.out.println(userService.findUserById(id));
         return userService.findUserById(id);
-
     }
 
-
+    @PostMapping("/admin/user/delete/{id}")
+    public void  deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+    }
 
 }
 
