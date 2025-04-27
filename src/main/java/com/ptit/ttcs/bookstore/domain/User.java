@@ -2,12 +2,13 @@ package com.ptit.ttcs.bookstore.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String email;
     String password;
@@ -17,7 +18,28 @@ public class User {
     String phone;
     String address;
 
+    @OneToOne()
+    @JoinColumn(name="cart_id",referencedColumnName = "id" )
+    private Cart cart;
 
+    @OneToMany(mappedBy = "user")
+    List<UserInvoice> userInvoices;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public List<UserInvoice> getUserInvoices() {
+        return userInvoices;
+    }
+
+    public void setUserInvoices(List<UserInvoice> userInvoices) {
+        this.userInvoices = userInvoices;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -98,6 +120,8 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", cart=" + cart +
+                ", userInvoices=" + userInvoices +
                 '}';
     }
 }

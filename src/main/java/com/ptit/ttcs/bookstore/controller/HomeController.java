@@ -1,6 +1,8 @@
 package com.ptit.ttcs.bookstore.controller;
 
+import com.ptit.ttcs.bookstore.domain.Book;
 import com.ptit.ttcs.bookstore.domain.User;
+import com.ptit.ttcs.bookstore.service.BookService;
 import com.ptit.ttcs.bookstore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.List;
 public class HomeController {
 
     private final UserService userService;
+
 
     public HomeController(UserService userService) {
         this.userService = userService;
@@ -48,7 +51,6 @@ public class HomeController {
     public void  deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
-
 }
 
 
