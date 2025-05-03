@@ -1,24 +1,29 @@
 package com.ptit.ttcs.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ptit.ttcs.bookstore.JsonViews.View;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="compose")
-public class Compose {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Compose implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
-    @JsonView(View.Basic.class)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @JsonView(View.AuthorWithBook.class)
     @ManyToOne
     @JoinColumn(name = "book_id")
     Book book;
 
-    @JsonView(View.BookInfo.class)
     @ManyToOne
     @JoinColumn(name = "author_id")
     Author author;

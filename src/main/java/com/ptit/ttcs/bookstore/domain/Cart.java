@@ -1,16 +1,24 @@
 package com.ptit.ttcs.bookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="Cart")
-public class Cart {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Cart implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    
     @OneToOne(mappedBy = "cart")
     private User user;
 

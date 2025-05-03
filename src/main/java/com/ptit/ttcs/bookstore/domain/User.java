@@ -1,45 +1,71 @@
 package com.ptit.ttcs.bookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+
     String email;
+    String username;
     String password;
     String fullname;
     Integer age;
     String gender;
     String phone;
     String address;
+    String ava_img;
+
+    public String getAva_img() {
+        return ava_img;
+    }
+
+    public void setAva_img(String ava_img) {
+        this.ava_img = ava_img;
+    }
 
     @OneToOne()
     @JoinColumn(name="cart_id",referencedColumnName = "id" )
     private Cart cart;
 
     @OneToMany(mappedBy = "user")
-    List<UserInvoice> userInvoices;
+    List<Receipt> receipt_list;
+
+    public List<Receipt> getReceipt_list() {
+        return receipt_list;
+    }
+
+    public void setReceipt_list(List<Receipt> receipt_list) {
+        this.receipt_list = receipt_list;
+    }
 
     public Cart getCart() {
         return cart;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setCart(Cart cart) {
         this.cart = cart;
     }
 
-    public List<UserInvoice> getUserInvoices() {
-        return userInvoices;
-    }
-
-    public void setUserInvoices(List<UserInvoice> userInvoices) {
-        this.userInvoices = userInvoices;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -114,14 +140,16 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", ava_img='" + ava_img + '\'' +
                 ", cart=" + cart +
-                ", userInvoices=" + userInvoices +
+                ", receipt_list=" + receipt_list +
                 '}';
     }
 }

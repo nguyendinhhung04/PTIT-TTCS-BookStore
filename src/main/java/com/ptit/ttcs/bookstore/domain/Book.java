@@ -1,47 +1,41 @@
 package com.ptit.ttcs.bookstore.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.ptit.ttcs.bookstore.JsonViews.View;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="book")
-public class Book {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Book implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
-    @JsonView(View.Basic.class)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @JsonView(View.Basic.class)
     String book_name;
 
-    @JsonView(View.Basic.class)
     float price;
 
-    @JsonView(View.Basic.class)
     Integer age_limit;
 
-    @JsonView(View.Basic.class)
     float discount;
 
-    @JsonView(View.Basic.class)
     @Column(columnDefinition = "TEXT")
     String introduction;
 
-    @JsonView(View.Basic.class)
     String publish_date;
 
-    @JsonView(View.Basic.class)
     String translator;
 
-    @JsonView(View.Basic.class)
     String cover_img;
 
-    @JsonView(View.BookInfo.class)
     @OneToMany(mappedBy = "book")
     List<Compose> composes;
 
@@ -49,22 +43,27 @@ public class Book {
     List<BookInCart> bookInCarts;
 
     @OneToMany(mappedBy = "book")
-    List<InvoiceDetail> invoiceDetails;
+    List<ReceiptDetail> receiptDetails;
 
-    @JsonView(View.BookInfo.class)
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
 
-    @JsonView(View.BookInfo.class)
     @ManyToOne
     @JoinColumn(name = "language_id")
     Language language;
 
-    @JsonView(View.BookInfo.class)
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     Publisher publisher;
+
+    public List<ReceiptDetail> getReceiptDetails() {
+        return receiptDetails;
+    }
+
+    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
+        this.receiptDetails = receiptDetails;
+    }
 
     public List<BookInCart> getBookInCarts() {
         return bookInCarts;
@@ -72,14 +71,6 @@ public class Book {
 
     public void setBookInCarts(List<BookInCart> bookInCarts) {
         this.bookInCarts = bookInCarts;
-    }
-
-    public List<InvoiceDetail> getInvoiceDetails() {
-        return invoiceDetails;
-    }
-
-    public void setInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
-        this.invoiceDetails = invoiceDetails;
     }
 
     public Long getId() {
@@ -200,7 +191,7 @@ public class Book {
                 ", cover_img='" + cover_img + '\'' +
                 ", composes=" + composes +
                 ", bookInCarts=" + bookInCarts +
-                ", invoiceDetails=" + invoiceDetails +
+                ", receiptDetails=" + receiptDetails +
                 ", category=" + category +
                 ", language=" + language +
                 ", publisher=" + publisher +

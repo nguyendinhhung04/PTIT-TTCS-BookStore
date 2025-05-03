@@ -7,25 +7,24 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="book_in_cart")
+@Table(name="receipt_detail")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class BookInCart implements Serializable {
+public class ReceiptDetail implements Serializable {
     private static final long serialVersionUID = 1L;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     Integer quantity;
+    Float price;
 
     @ManyToOne
-    @JoinColumn(name="cart_id", referencedColumnName = "id")
-    private Cart cart;
+    @JoinColumn(name="receipt_id")
+    Receipt receipt;
 
     @ManyToOne
-    @JoinColumn(name="book_id", referencedColumnName = "id")
-    private Book book;
+    @JoinColumn(name="book_id")
+    Book book;
 
     public Long getId() {
         return id;
@@ -43,12 +42,20 @@ public class BookInCart implements Serializable {
         this.quantity = quantity;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 
     public Book getBook() {
@@ -61,10 +68,11 @@ public class BookInCart implements Serializable {
 
     @Override
     public String toString() {
-        return "BookInCart{" +
+        return "ReceiptDetail{" +
                 "id=" + id +
                 ", quantity=" + quantity +
-                ", cart=" + cart +
+                ", price=" + price +
+                ", receipt=" + receipt +
                 ", book=" + book +
                 '}';
     }

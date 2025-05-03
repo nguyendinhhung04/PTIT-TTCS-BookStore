@@ -25,7 +25,6 @@ public class BookControler {
         this.composeRepository = composeRepository;
     }
 
-    @JsonView(View.BookInfo.class)
     @GetMapping("/admin/resource/book/view")
     public List<Book> viewBook() {
         System.out.println("Access form frontend");

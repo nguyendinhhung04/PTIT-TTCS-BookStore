@@ -11,5 +11,9 @@ public class View {
     public static class AllBookOfPublisher extends Basic {}
     public static class AllBookInLanguage extends Basic {}
 
+    public static class UserInfo extends Basic {}
+    public static class CartInfo extends Basic {}
+    public static class AllInvoicesOfUser extends Basic {}
+
 
 }

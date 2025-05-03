@@ -1,33 +1,35 @@
 package com.ptit.ttcs.bookstore.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ptit.ttcs.bookstore.JsonViews.View;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="author")
-public class Author {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Author implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
-//    @JsonView(View.Basic.class)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @JsonView(View.Basic.class)
     String name;
 
-    @JsonView(View.Basic.class)
     Integer age;
 
-    @JsonView(View.Basic.class)
     @Column(columnDefinition = "TEXT")
     String introduction;
 
 
-    @JsonView(View.AuthorWithBook.class)
     @OneToMany(mappedBy = "author")
     List<Compose> composes;
 

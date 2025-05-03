@@ -1,38 +1,15 @@
-package com.ptit.ttcs.bookstore.domain;
+package com.ptit.ttcs.bookstore.domain.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
-
-import java.io.Serializable;
-
-@Entity
-@Table(name ="staff")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Staff implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+public class CreateUserDTO {
     String fullname;
     Integer age;
     String gender;
+    String address;
     String email;
     String password;
     String phone;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    String username;
+    String ava_img;
 
     public String getFullname() {
         return fullname;
@@ -40,6 +17,22 @@ public class Staff implements Serializable {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getAva_img() {
+        return ava_img;
+    }
+
+    public void setAva_img(String ava_img) {
+        this.ava_img = ava_img;
+    }
+
+    public String getName() {
+        return fullname;
+    }
+
+    public void setName(String name) {
+        this.fullname = name;
     }
 
     public Integer getAge() {
@@ -56,6 +49,14 @@ public class Staff implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -82,25 +83,26 @@ public class Staff implements Serializable {
         this.phone = phone;
     }
 
-    public Role getRole() {
-        return role;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
-        return "Staff{" +
-                "id=" + id +
-                ", fullname='" + fullname + '\'' +
+        return "CreateUserDTO{" +
+                "fullname='" + fullname + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
+                ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", role=" + role +
+                ", username='" + username + '\'' +
+                ", ava_img='" + ava_img + '\'' +
                 '}';
     }
 }

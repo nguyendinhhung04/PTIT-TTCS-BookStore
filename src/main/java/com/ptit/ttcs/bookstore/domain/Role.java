@@ -1,15 +1,22 @@
 package com.ptit.ttcs.bookstore.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="role")
-public class Role {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Role implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String role_name;
 
