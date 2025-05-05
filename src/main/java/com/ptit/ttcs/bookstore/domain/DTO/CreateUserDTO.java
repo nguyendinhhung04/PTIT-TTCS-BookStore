@@ -1,5 +1,7 @@
 package com.ptit.ttcs.bookstore.domain.DTO;
 
+import java.util.Arrays;
+
 public class CreateUserDTO {
     String fullname;
     Integer age;
@@ -9,7 +11,7 @@ public class CreateUserDTO {
     String password;
     String phone;
     String username;
-    String ava_img;
+
 
     public String getFullname() {
         return fullname;
@@ -19,13 +21,6 @@ public class CreateUserDTO {
         this.fullname = fullname;
     }
 
-    public String getAva_img() {
-        return ava_img;
-    }
-
-    public void setAva_img(String ava_img) {
-        this.ava_img = ava_img;
-    }
 
     public String getName() {
         return fullname;
@@ -102,7 +97,6 @@ public class CreateUserDTO {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
-                ", ava_img='" + ava_img + '\'' +
                 '}';
     }
 }

@@ -25,15 +25,10 @@ public class User implements Serializable {
     String gender;
     String phone;
     String address;
-    String ava_img;
 
-    public String getAva_img() {
-        return ava_img;
-    }
-
-    public void setAva_img(String ava_img) {
-        this.ava_img = ava_img;
-    }
+    @OneToOne()
+    @JoinColumn(name="avaImg_id", referencedColumnName = "id")
+    private Image image;
 
     @OneToOne()
     @JoinColumn(name="cart_id",referencedColumnName = "id" )
@@ -147,7 +142,7 @@ public class User implements Serializable {
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", ava_img='" + ava_img + '\'' +
+                ", image=" + image +
                 ", cart=" + cart +
                 ", receipt_list=" + receipt_list +
                 '}';

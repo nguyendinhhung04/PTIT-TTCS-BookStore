@@ -5,6 +5,7 @@ import com.ptit.ttcs.bookstore.JsonViews.View;
 import com.ptit.ttcs.bookstore.domain.Book;
 import com.ptit.ttcs.bookstore.domain.DTO.CreateUserDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.GetUserDTO;
+import com.ptit.ttcs.bookstore.domain.Image;
 import com.ptit.ttcs.bookstore.domain.Mapper.UserInfoMapper;
 import com.ptit.ttcs.bookstore.domain.Mapper.UserInfoMapper;
 import com.ptit.ttcs.bookstore.domain.Staff;
@@ -12,9 +13,12 @@ import com.ptit.ttcs.bookstore.domain.User;
 import com.ptit.ttcs.bookstore.service.BookService;
 import com.ptit.ttcs.bookstore.service.StaffService;
 import com.ptit.ttcs.bookstore.service.UserService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,15 +42,19 @@ public class HomeController {
 
 
     @PostMapping(value = "/user/create", consumes = "application/json", produces = "application/json" )
-    public void createUser(@RequestBody User user) {
-        System.out.println("Received User: " + user );
+    public void createUser(@RequestBody CreateUserDTO createUserDTO) {
+        User user = UserInfoMapper.INSTANCE.CreateUserDTOToUser(createUserDTO);
         userService.saveUser(user);
+    }
+
+    @PostMapping("user/uploadImg")
+    public void getUserImg(@RequestPart("inputImg") MultipartFile inputImg) {
+        System.out.println(inputImg.getOriginalFilename());
     }
 
 
     @GetMapping("/admin/user/view")
     public List<GetUserDTO> viewUser() {
-        System.out.println("Access form frontend");
         List<User> userList = userService.findAllUser();
         return userList.stream().map(UserInfoMapper.INSTANCE::userToGetUserDTO ).collect(Collectors.toList());
     }
