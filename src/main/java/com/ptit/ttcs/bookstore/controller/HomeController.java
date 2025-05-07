@@ -41,15 +41,15 @@ public class HomeController {
     }
 
 
-    @PostMapping(value = "/user/create", consumes = "application/json", produces = "application/json" )
-    public void createUser(@RequestBody CreateUserDTO createUserDTO) {
-        User user = UserInfoMapper.INSTANCE.CreateUserDTOToUser(createUserDTO);
-        userService.saveUser(user);
+    @PostMapping("/user/create")
+    public void createUser(@RequestPart("userInput") CreateUserDTO createUserDTO, @RequestPart("inputImg") MultipartFile inputImg) {
+        System.out.println(inputImg.getOriginalFilename() + " " + createUserDTO);
     }
 
-    @PostMapping("user/uploadImg")
-    public void getUserImg(@RequestPart("inputImg") MultipartFile inputImg) {
+    @PostMapping("user/uploadImg/{id}")
+    public void getUserImg(@RequestPart("inputImg") MultipartFile inputImg, @PathVariable("id") Long id) {
         System.out.println(inputImg.getOriginalFilename());
+        System.out.println(id);
     }
 
 
