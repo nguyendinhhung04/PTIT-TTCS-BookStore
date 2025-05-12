@@ -6,21 +6,33 @@ import jakarta.persistence.*;
 @Table(name = "image")
 public class Image {
     @Id
-    String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     String type;
+
 
     @Lob  // Large Object - (pdf, image,....)
     @Column(columnDefinition = "LONGBLOB")  // data type for mySQL
     private byte[] data;
 
+
+
     @OneToOne(mappedBy = "image")
     private User user;
 
-    public String getId() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,4 +51,8 @@ public class Image {
     public void setData(byte[] data) {
         this.data = data;
     }
+
+
+
 }
+

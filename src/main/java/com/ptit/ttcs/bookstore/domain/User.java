@@ -37,6 +37,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     List<Receipt> receipt_list;
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public List<Receipt> getReceipt_list() {
         return receipt_list;
     }

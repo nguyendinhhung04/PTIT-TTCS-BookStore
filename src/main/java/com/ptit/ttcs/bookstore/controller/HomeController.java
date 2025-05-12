@@ -11,6 +11,7 @@ import com.ptit.ttcs.bookstore.domain.Mapper.UserInfoMapper;
 import com.ptit.ttcs.bookstore.domain.Staff;
 import com.ptit.ttcs.bookstore.domain.User;
 import com.ptit.ttcs.bookstore.service.BookService;
+import com.ptit.ttcs.bookstore.service.ImageService;
 import com.ptit.ttcs.bookstore.service.StaffService;
 import com.ptit.ttcs.bookstore.service.UserService;
 import org.springframework.http.MediaType;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +31,12 @@ public class HomeController {
 
     private final UserService userService;
     private final StaffService staffService;
+    private final ImageService imageService;
 
-
-    public HomeController(UserService userService, StaffService staffService) {
+    public HomeController(UserService userService, StaffService staffService, ImageService imageService) {
         this.userService = userService;
         this.staffService = staffService;
+        this.imageService = imageService;
     }
 
     @RequestMapping("/")
@@ -42,9 +46,25 @@ public class HomeController {
 
 
     @PostMapping("/user/create")
-    public void createUser(@RequestPart("userInput") CreateUserDTO createUserDTO, @RequestPart("inputImg") MultipartFile inputImg) {
+    public void createUser(@RequestPart("userInput") CreateUserDTO createUserDTO, @RequestPart("inputImg") MultipartFile inputImg) throws IOException {
         System.out.println(inputImg.getOriginalFilename() + " " + createUserDTO);
+        User newUser = userService.saveUser(UserInfoMapper.INSTANCE.CreateUserDTOToUser(createUserDTO));
+
+        String fileName = inputImg.getOriginalFilename();
+        String fileType = inputImg.getContentType();
+        byte[] data = inputImg.getBytes();
+
+        Image image = new Image();
+        image.setData(data);
+        image.setType(fileType);
+        image.setUser(newUser);
+
+        Image new_img = imageService.saveImg(image);
+        newUser.setImage(new_img);
+        userService.saveUser(newUser);
     }
+
+
 
     @PostMapping("user/uploadImg/{id}")
     public void getUserImg(@RequestPart("inputImg") MultipartFile inputImg, @PathVariable("id") Long id) {
@@ -61,7 +81,8 @@ public class HomeController {
 
     @GetMapping("/admin/user/detail/{id}")
     public GetUserDTO viewDetailUser(@PathVariable("id") Long id) {
-        return (UserInfoMapper.INSTANCE.userToGetUserDTO(userService.findUserById(id)));
+        GetUserDTO temp = UserInfoMapper.INSTANCE.userToGetUserDTO(userService.findUserById(id));
+        return temp;
     }
 
     @PostMapping("/admin/user/delete/{id}")
