@@ -17,17 +17,6 @@ public class Image {
 
 
 
-    @OneToOne(mappedBy = "image")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Long getId() {
         return id;
     }
@@ -51,8 +40,6 @@ public class Image {
     public void setData(byte[] data) {
         this.data = data;
     }
-
-
 
 }
 

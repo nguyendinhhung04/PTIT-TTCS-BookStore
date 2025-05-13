@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.ptit.ttcs.bookstore.JsonViews.View;
 import com.ptit.ttcs.bookstore.domain.Book;
 import com.ptit.ttcs.bookstore.domain.DTO.CreateUserDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.EditUserDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.GetUserDTO;
 import com.ptit.ttcs.bookstore.domain.Image;
 import com.ptit.ttcs.bookstore.domain.Mapper.UserInfoMapper;
@@ -32,11 +33,13 @@ public class HomeController {
     private final UserService userService;
     private final StaffService staffService;
     private final ImageService imageService;
+    private final UserInfoMapper userInfoMapper;
 
-    public HomeController(UserService userService, StaffService staffService, ImageService imageService) {
+    public HomeController(UserService userService, StaffService staffService, ImageService imageService, UserInfoMapper userInfoMapper) {
         this.userService = userService;
         this.staffService = staffService;
         this.imageService = imageService;
+        this.userInfoMapper = userInfoMapper;
     }
 
     @RequestMapping("/")
@@ -57,14 +60,34 @@ public class HomeController {
         Image image = new Image();
         image.setData(data);
         image.setType(fileType);
-        image.setUser(newUser);
 
         Image new_img = imageService.saveImg(image);
         newUser.setImage(new_img);
         userService.saveUser(newUser);
     }
 
+    @PostMapping("/user/edit")
+    public void editUser(@RequestPart("userData") EditUserDTO editUserDTO, @RequestPart("imgData") MultipartFile imgData) throws IOException
+    {
 
+        System.out.println(editUserDTO);
+        User existUser = userService.findUserById(editUserDTO.getId());
+        existUser.setFullname(editUserDTO.getFullname());
+        existUser.setEmail(editUserDTO.getEmail());
+        existUser.setPassword(editUserDTO.getPassword());
+        existUser.setAge(editUserDTO.getAge());
+        existUser.setAddress(editUserDTO.getAddress());
+        existUser.setPhone(editUserDTO.getPhone());
+        existUser.setGender(editUserDTO.getGender());
+
+        Image existImg = existUser.getImage();
+        existImg.setData(imgData.getBytes());
+        existImg.setType(imgData.getContentType());
+
+        userService.saveUser(existUser);
+        imageService.saveImg(existImg);
+
+    }
 
     @PostMapping("user/uploadImg/{id}")
     public void getUserImg(@RequestPart("inputImg") MultipartFile inputImg, @PathVariable("id") Long id) {

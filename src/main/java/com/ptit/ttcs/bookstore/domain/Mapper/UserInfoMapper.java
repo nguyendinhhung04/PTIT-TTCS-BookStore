@@ -2,8 +2,10 @@ package com.ptit.ttcs.bookstore.domain.Mapper;
 
 
 import com.ptit.ttcs.bookstore.domain.DTO.CreateUserDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.EditUserDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.GetUserDTO;
 import com.ptit.ttcs.bookstore.domain.User;
+import com.ptit.ttcs.bookstore.service.UserService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserInfoMapper {
+
+
+
 
     UserInfoMapper INSTANCE = Mappers.getMapper(UserInfoMapper.class);
 
@@ -31,9 +36,9 @@ public interface UserInfoMapper {
         getUserDTO.setData( Base64.getEncoder().encodeToString( user.getImage().getData()) );
 //        getUserDTO.setData(  user.getImage().getData() );
         getUserDTO.setImageType( user.getImage().getType() );
-
         return getUserDTO;
     };
+
 
 
     User CreateUserDTOToUser(CreateUserDTO createUserDTO);
