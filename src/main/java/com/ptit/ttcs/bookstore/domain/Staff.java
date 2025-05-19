@@ -19,12 +19,21 @@ public class Staff implements Serializable {
     Integer age;
     String gender;
     String email;
+    String username;
     String password;
     String phone;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Long getId() {
         return id;
@@ -98,6 +107,7 @@ public class Staff implements Serializable {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", role=" + role +

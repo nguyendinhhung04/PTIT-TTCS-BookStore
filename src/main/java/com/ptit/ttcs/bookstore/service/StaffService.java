@@ -18,4 +18,8 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
+    public Staff findByUsername(String username) {
+        return this.staffRepository.findByUsername(username);
+    }
+
 }
