@@ -69,7 +69,6 @@ public class HomeController {
     @PostMapping("/user/edit")
     public void editUser(@RequestPart("userData") EditUserDTO editUserDTO, @RequestPart("imgData") MultipartFile imgData) throws IOException
     {
-
         System.out.println(editUserDTO);
         User existUser = userService.findUserById(editUserDTO.getId());
         existUser.setFullname(editUserDTO.getFullname());
@@ -108,9 +107,11 @@ public class HomeController {
         return temp;
     }
 
-    @PostMapping("/admin/user/delete/{id}")
+    @DeleteMapping("/admin/user/delete/{id}")
     public void  deleteUser(@PathVariable("id") Long id) {
+        Image tmp = userService.findUserById(id).getImage();
         userService.deleteUser(id);
+        imageService.deleteImg( tmp.getId() );
     }
 
     @GetMapping("/admin/staff/view")

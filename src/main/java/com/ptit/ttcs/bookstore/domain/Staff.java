@@ -2,6 +2,7 @@ package com.ptit.ttcs.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ptit.ttcs.bookstore.security.config.Role;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,12 +20,23 @@ public class Staff implements Serializable {
     Integer age;
     String gender;
     String email;
+    String username;
     String password;
     String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
+    @Enumerated(EnumType.STRING)
     private Role role;
+
+    public Staff() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Long getId() {
         return id;
@@ -103,4 +115,6 @@ public class Staff implements Serializable {
                 ", role=" + role +
                 '}';
     }
+
+
 }
