@@ -1,8 +1,9 @@
 package com.ptit.ttcs.bookstore.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ptit.ttcs.bookstore.domain.enums.Category;
+import com.ptit.ttcs.bookstore.domain.enums.Language;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,45 +15,35 @@ import java.util.List;
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     String book_name;
-
     float price;
-
     Integer age_limit;
-
     float discount;
 
     @Column(columnDefinition = "TEXT")
     String introduction;
 
+    @Column(columnDefinition = "DATE")
     String publish_date;
-
     String translator;
-
     String code;
+    int quantity;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
     @OneToMany(mappedBy = "book")
     List<Compose> composes;
 
-//    @OneToMany(mappedBy ="book" )
-//    List<BookInCart> bookInCarts;
-
-    @OneToMany(mappedBy = "book")
-    List<ReceiptDetail> receiptDetails;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "language_id")
-    Language language;
+//    @OneToMany(mappedBy = "book")
+//    List<ReceiptDetail> receiptDetails;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
@@ -62,6 +53,14 @@ public class Book implements Serializable {
     @JoinColumn(name="coverImage_id", referencedColumnName = "id")
     private CoverImage coverImage;
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public String getCode() {
         return code;
     }
@@ -69,22 +68,6 @@ public class Book implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-
-    public List<ReceiptDetail> getReceiptDetails() {
-        return receiptDetails;
-    }
-
-    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
-        this.receiptDetails = receiptDetails;
-    }
-
-//    public List<BookInCart> getBookInCarts() {
-//        return bookInCarts;
-//    }
-//
-//    public void setBookInCarts(List<BookInCart> bookInCarts) {
-//        this.bookInCarts = bookInCarts;
-//    }
 
     public Long getId() {
         return id;
@@ -158,22 +141,6 @@ public class Book implements Serializable {
         this.composes = composes;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public Publisher getPublisher() {
         return publisher;
     }
@@ -190,6 +157,22 @@ public class Book implements Serializable {
         this.coverImage = coverImage;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -203,7 +186,6 @@ public class Book implements Serializable {
                 ", publish_date='" + publish_date + '\'' +
                 ", translator='" + translator + '\'' +
                 ", composes=" + composes +
-                ", receiptDetails=" + receiptDetails +
                 ", category=" + category +
                 ", language=" + language +
                 ", publisher=" + publisher +

@@ -1,7 +1,5 @@
 package com.ptit.ttcs.bookstore.domain.DTO;
 
-import com.ptit.ttcs.bookstore.domain.Image;
-
 import java.util.Arrays;
 
 public class GetUserDTO {
@@ -14,8 +12,6 @@ public class GetUserDTO {
     String gender;
     String phone;
     String address;
-    String data;
-    String imageType;
 
 //    byte[] data;
 //
@@ -28,21 +24,6 @@ public class GetUserDTO {
 //    }
 
 
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 
     public Long getId() {
         return id;
@@ -128,7 +109,6 @@ public class GetUserDTO {
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", imageType='" + imageType + '\'' +
                 '}';
     }
 }

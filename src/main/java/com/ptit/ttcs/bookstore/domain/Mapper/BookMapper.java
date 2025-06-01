@@ -2,6 +2,7 @@ package com.ptit.ttcs.bookstore.domain.Mapper;
 
 import com.ptit.ttcs.bookstore.domain.Book;
 import com.ptit.ttcs.bookstore.domain.DTO.Book.BookDTO;
+import com.ptit.ttcs.bookstore.service.PublisherService;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -27,10 +28,11 @@ public interface BookMapper {
         book.setTranslator(bookDTO.getTranslator());
         book.setCategory(bookDTO.getCategory());
         book.setLanguage(bookDTO.getLanguage());
-        book.setPublisher(bookDTO.getPublisher());
+        book.setPublisher(null);
         book.setCoverImage(bookDTO.getCoverImage());
-        book.setComposes(bookDTO.getComposes());
+        book.setComposes(null);
         book.setCode(bookDTO.getCode());
+        book.setQuantity( bookDTO.getQuantity());
         return book;
     }
 
@@ -50,10 +52,11 @@ public interface BookMapper {
         bookDTO.setTranslator(book.getTranslator());
         bookDTO.setCategory(book.getCategory());
         bookDTO.setLanguage(book.getLanguage());
-        bookDTO.setPublisher(book.getPublisher());
+        bookDTO.setPublisher_id(book.getPublisher().getId());
         bookDTO.setCoverImage(book.getCoverImage());
-        bookDTO.setComposes(book.getComposes());
+        bookDTO.setAuthor_ids(book.getComposes().stream().map(compose -> compose.getAuthor().getId()).toList());
         bookDTO.setCode(book.getCode());
+        bookDTO.setQuantity(book.getQuantity());
         return bookDTO;
     }
 }

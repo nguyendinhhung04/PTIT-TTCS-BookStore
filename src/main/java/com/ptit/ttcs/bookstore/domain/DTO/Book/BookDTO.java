@@ -1,6 +1,8 @@
 package com.ptit.ttcs.bookstore.domain.DTO.Book;
 
 import com.ptit.ttcs.bookstore.domain.*;
+import com.ptit.ttcs.bookstore.domain.enums.Category;
+import com.ptit.ttcs.bookstore.domain.enums.Language;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -22,19 +24,27 @@ public class BookDTO {
 
     String translator;
 
-    List<Compose> composes;
+    List<Long> author_ids;
 
-    List<ReceiptDetail> receiptDetails;
+    com.ptit.ttcs.bookstore.domain.enums.Category category;
 
-    Category category;
+    com.ptit.ttcs.bookstore.domain.enums.Language language;
 
-    Language language;
-
-    Publisher publisher;
+    Long publisher_id;
 
     CoverImage coverImage;
 
     String code;
+
+    int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public String getCode() {
         return code;
@@ -108,28 +118,12 @@ public class BookDTO {
         this.translator = translator;
     }
 
-    public List<Compose> getComposes() {
-        return composes;
+    public List<Long> getAuthor_ids() {
+        return author_ids;
     }
 
-    public void setComposes(List<Compose> composes) {
-        this.composes = composes;
-    }
-
-    public List<ReceiptDetail> getReceiptDetails() {
-        return receiptDetails;
-    }
-
-    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
-        this.receiptDetails = receiptDetails;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setAuthor_ids(List<Long> author_ids) {
+        this.author_ids = author_ids;
     }
 
     public Language getLanguage() {
@@ -140,12 +134,20 @@ public class BookDTO {
         this.language = language;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Long getPublisher_id() {
+        return publisher_id;
+    }
+
+    public void setPublisher_id(Long publisher_id) {
+        this.publisher_id = publisher_id;
     }
 
     public CoverImage getCoverImage() {
@@ -161,19 +163,19 @@ public class BookDTO {
         return "BookDTO{" +
                 "id=" + id +
                 ", book_name='" + book_name + '\'' +
-                " code='" + code + '\'' +
                 ", price=" + price +
                 ", age_limit=" + age_limit +
                 ", discount=" + discount +
                 ", introduction='" + introduction + '\'' +
                 ", publish_date='" + publish_date + '\'' +
                 ", translator='" + translator + '\'' +
-                ", composes=" + composes +
-                ", receiptDetails=" + receiptDetails +
+                ", author_ids=" + author_ids +
                 ", category=" + category +
                 ", language=" + language +
-                ", publisher=" + publisher +
+                ", publisher_id=" + publisher_id +
                 ", coverImage=" + coverImage +
+                ", code='" + code + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 }

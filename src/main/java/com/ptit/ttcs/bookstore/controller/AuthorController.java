@@ -43,4 +43,6 @@ public class AuthorController {
         Author savedAuthor = authorService.saveAuthor(author);
         return AuthorMapper.INSTANCE.toDTO(savedAuthor);
     }
+
+    //Delete
 }

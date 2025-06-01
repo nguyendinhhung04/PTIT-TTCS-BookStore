@@ -24,8 +24,6 @@ public interface UserInfoMapper {
     default GetUserDTO userToGetUserDTO(User user)
     {
         GetUserDTO getUserDTO = new GetUserDTO();
-        getUserDTO.setUsername(user.getUsername());
-        getUserDTO.setPassword(user.getPassword());
         getUserDTO.setEmail(user.getEmail());
         getUserDTO.setPhone(user.getPhone());
         getUserDTO.setAddress(user.getAddress());
@@ -33,9 +31,7 @@ public interface UserInfoMapper {
         getUserDTO.setAge(user.getAge());
         getUserDTO.setFullname(user.getFullname());
         getUserDTO.setGender(user.getGender());
-        getUserDTO.setData( Base64.getEncoder().encodeToString( user.getImage().getData()) );
-//        getUserDTO.setData(  user.getImage().getData() );
-        getUserDTO.setImageType( user.getImage().getType() );
+
         return getUserDTO;
     };
 

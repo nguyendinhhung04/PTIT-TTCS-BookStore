@@ -18,32 +18,18 @@ public class User implements Serializable {
     Long id;
 
     String email;
-    String username;
-    String password;
     String fullname;
     Integer age;
     String gender;
     String phone;
     String address;
 
-    @OneToOne()
-    @JoinColumn(name="avaImg_id", referencedColumnName = "id")
-    private Image image;
 
-//    @OneToOne()
-//    @JoinColumn(name="cart_id",referencedColumnName = "id" )
-//    private Cart cart;
 
     @OneToMany(mappedBy = "user")
     List<Receipt> receipt_list;
 
-    public Image getImage() {
-        return image;
-    }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 
     public List<Receipt> getReceipt_list() {
         return receipt_list;
@@ -53,21 +39,10 @@ public class User implements Serializable {
         this.receipt_list = receipt_list;
     }
 
-//    public Cart getCart() {
-//        return cart;
-//    }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
-//    public void setCart(Cart cart) {
-//        this.cart = cart;
-//    }
+
 
 
     public void setId(Long id) {
@@ -110,13 +85,7 @@ public class User implements Serializable {
         return this.phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getPassword() {
-        return this.password;
-    }
 
     public Integer getAge() {
         return age;
@@ -143,14 +112,11 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", image=" + image +
                 ", receipt_list=" + receipt_list +
                 '}';
     }
