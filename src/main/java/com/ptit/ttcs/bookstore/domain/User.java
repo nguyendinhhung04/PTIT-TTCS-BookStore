@@ -30,9 +30,9 @@ public class User implements Serializable {
     @JoinColumn(name="avaImg_id", referencedColumnName = "id")
     private Image image;
 
-    @OneToOne()
-    @JoinColumn(name="cart_id",referencedColumnName = "id" )
-    private Cart cart;
+//    @OneToOne()
+//    @JoinColumn(name="cart_id",referencedColumnName = "id" )
+//    private Cart cart;
 
     @OneToMany(mappedBy = "user")
     List<Receipt> receipt_list;
@@ -53,9 +53,9 @@ public class User implements Serializable {
         this.receipt_list = receipt_list;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
+//    public Cart getCart() {
+//        return cart;
+//    }
 
     public String getUsername() {
         return username;
@@ -65,9 +65,9 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
+//    public void setCart(Cart cart) {
+//        this.cart = cart;
+//    }
 
 
     public void setId(Long id) {
@@ -151,7 +151,6 @@ public class User implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", image=" + image +
-                ", cart=" + cart +
                 ", receipt_list=" + receipt_list +
                 '}';
     }

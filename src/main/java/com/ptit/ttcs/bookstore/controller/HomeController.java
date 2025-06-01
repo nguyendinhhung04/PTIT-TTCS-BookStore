@@ -50,7 +50,6 @@ public class HomeController {
 
     @PostMapping("/user/create")
     public void createUser(@RequestPart("userInput") CreateUserDTO createUserDTO, @RequestPart("inputImg") MultipartFile inputImg) throws IOException {
-        System.out.println(inputImg.getOriginalFilename() + " " + createUserDTO);
         User newUser = userService.saveUser(UserInfoMapper.INSTANCE.CreateUserDTOToUser(createUserDTO));
 
         String fileName = inputImg.getOriginalFilename();

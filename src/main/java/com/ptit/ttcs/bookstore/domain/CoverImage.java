@@ -2,9 +2,11 @@ package com.ptit.ttcs.bookstore.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
-@Table(name = "image")
-public class Image {
+@Table(name = "cover_img")
+public class CoverImage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -40,5 +42,12 @@ public class Image {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "CoverImage{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", data=" + Arrays.toString(data) +
+                '}';
+    }
 }
-

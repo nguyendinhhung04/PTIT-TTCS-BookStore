@@ -20,7 +20,6 @@ public class Publisher implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String name;
-    String img;
 
     @OneToMany(mappedBy = "publisher")
     List<Book> books;
@@ -41,12 +40,12 @@ public class Publisher implements Serializable {
         this.name = name;
     }
 
-    public String getImg() {
-        return img;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class Publisher implements Serializable {
         return "Publisher{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", img='" + img + '\'' +
+                ", books=" + books +
                 '}';
-    }   
+    }
 }

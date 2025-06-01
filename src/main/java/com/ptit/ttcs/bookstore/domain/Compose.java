@@ -56,8 +56,8 @@ public class Compose implements Serializable {
     public String toString() {
         return "Compose{" +
                 "id=" + id +
-                ", book=" + book +
-                ", author=" + author +
+                ", book=" + book.getId() +
+                ", author=" + author.getId() +
                 '}';
     }
 }

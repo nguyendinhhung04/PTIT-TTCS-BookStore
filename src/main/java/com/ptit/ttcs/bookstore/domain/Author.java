@@ -33,6 +33,14 @@ public class Author implements Serializable {
     @OneToMany(mappedBy = "author")
     List<Compose> composes;
 
+    public List<Compose> getComposes() {
+        return composes;
+    }
+
+    public void setComposes(List<Compose> composes) {
+        this.composes = composes;
+    }
+
     public Long getId() {
         return id;
     }

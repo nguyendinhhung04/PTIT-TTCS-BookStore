@@ -1,18 +1,41 @@
 package com.ptit.ttcs.bookstore.domain.Mapper;
 
 import com.ptit.ttcs.bookstore.domain.Author;
-import com.ptit.ttcs.bookstore.domain.DTO.AuthorDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.Author.AuthorDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public class AuthorMapper {
-    public static AuthorDTO toDTO(Author author, String imageUrl) {
-        if (author == null) return null;
+@Mapper(componentModel = "spring")
 
-        return new AuthorDTO(
-            author.getId(),
-            author.getName(),
-            author.getAge(),
-            author.getIntroduction(),
-            imageUrl // truyền đường dẫn ảnh hoặc null nếu chưa có
-        );
+public interface AuthorMapper {
+
+    AuthorMapper INSTANCE = Mappers.getMapper(AuthorMapper.class);
+
+    default Author toAuthor(AuthorDTO authorDTO) {
+        if (authorDTO == null) {
+            return null;
+        }
+
+        Author author = new Author();
+        author.setId(authorDTO.getId());
+        author.setName(authorDTO.getName());
+        author.setAge(authorDTO.getAge());
+        author.setIntroduction(authorDTO.getIntroduction());
+        author.setComposes(authorDTO.getComposes());
+        return author;
+    }
+
+    default AuthorDTO toDTO(Author author) {
+        if (author == null) {
+            return null;
+        }
+
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(author.getId());
+        authorDTO.setName(author.getName());
+        authorDTO.setAge(author.getAge());
+        authorDTO.setIntroduction(author.getIntroduction());
+        authorDTO.setComposes(author.getComposes());
+        return authorDTO;
     }
 }

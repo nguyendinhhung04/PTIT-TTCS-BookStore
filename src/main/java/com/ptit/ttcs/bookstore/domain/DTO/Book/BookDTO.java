@@ -1,22 +1,11 @@
-package com.ptit.ttcs.bookstore.domain;
+package com.ptit.ttcs.bookstore.domain.DTO.Book;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ptit.ttcs.bookstore.domain.*;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name="book")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Book implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class BookDTO {
     Long id;
 
     String book_name;
@@ -27,40 +16,25 @@ public class Book implements Serializable {
 
     float discount;
 
-    @Column(columnDefinition = "TEXT")
     String introduction;
 
     String publish_date;
 
     String translator;
 
-    String code;
-
-
-    @OneToMany(mappedBy = "book")
     List<Compose> composes;
 
-//    @OneToMany(mappedBy ="book" )
-//    List<BookInCart> bookInCarts;
-
-    @OneToMany(mappedBy = "book")
     List<ReceiptDetail> receiptDetails;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
     Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "language_id")
     Language language;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
     Publisher publisher;
 
-    @OneToOne()
-    @JoinColumn(name="coverImage_id", referencedColumnName = "id")
-    private CoverImage coverImage;
+    CoverImage coverImage;
+
+    String code;
 
     public String getCode() {
         return code;
@@ -69,22 +43,6 @@ public class Book implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-
-    public List<ReceiptDetail> getReceiptDetails() {
-        return receiptDetails;
-    }
-
-    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
-        this.receiptDetails = receiptDetails;
-    }
-
-//    public List<BookInCart> getBookInCarts() {
-//        return bookInCarts;
-//    }
-//
-//    public void setBookInCarts(List<BookInCart> bookInCarts) {
-//        this.bookInCarts = bookInCarts;
-//    }
 
     public Long getId() {
         return id;
@@ -158,6 +116,14 @@ public class Book implements Serializable {
         this.composes = composes;
     }
 
+    public List<ReceiptDetail> getReceiptDetails() {
+        return receiptDetails;
+    }
+
+    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
+        this.receiptDetails = receiptDetails;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -192,7 +158,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookDTO{" +
                 "id=" + id +
                 ", book_name='" + book_name + '\'' +
                 " code='" + code + '\'' +
@@ -207,6 +173,7 @@ public class Book implements Serializable {
                 ", category=" + category +
                 ", language=" + language +
                 ", publisher=" + publisher +
+                ", coverImage=" + coverImage +
                 '}';
     }
 }
