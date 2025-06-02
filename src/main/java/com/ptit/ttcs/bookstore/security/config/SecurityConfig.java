@@ -67,6 +67,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     .requestMatchers("/admin/resource/category/all").permitAll()
                     .requestMatchers("/admin/resource/language/all").permitAll()
                     .requestMatchers("/admin/resource/author/**").permitAll()
+                    .requestMatchers("/admin/resource/publisher/**").permitAll()
 
                     .anyRequest().authenticated()                  // Cần JWT
 
