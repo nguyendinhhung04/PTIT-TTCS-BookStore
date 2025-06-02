@@ -62,6 +62,12 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/admin/resource/book/**").permitAll()
+                    .requestMatchers("/admin/resource/book/create").authenticated()
+                    .requestMatchers("http://localhost:8080/admin/resource/category/all").permitAll()
+                    .requestMatchers("http://localhost:8080/admin/resource/language/all").permitAll()
+                    .requestMatchers("http://localhost:8080/admin/resource/author/**").permitAll()
+
                     .anyRequest().authenticated()                  // Cần JWT
 
             )
