@@ -64,9 +64,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/admin/resource/book/**").permitAll()
                     .requestMatchers("/admin/resource/book/create").authenticated()
-                    .requestMatchers("http://localhost:8080/admin/resource/category/all").permitAll()
-                    .requestMatchers("http://localhost:8080/admin/resource/language/all").permitAll()
-                    .requestMatchers("http://localhost:8080/admin/resource/author/**").permitAll()
+                    .requestMatchers("/admin/resource/category/all").permitAll()
+                    .requestMatchers("/admin/resource/language/all").permitAll()
+                    .requestMatchers("/admin/resource/author/**").permitAll()
 
                     .anyRequest().authenticated()                  // Cần JWT
 
