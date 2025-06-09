@@ -1,7 +1,9 @@
 package com.ptit.ttcs.bookstore.domain.DTO.BillDTO;
 
+import com.ptit.ttcs.bookstore.domain.BillDetail;
 import com.ptit.ttcs.bookstore.domain.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillDTO {
@@ -10,7 +12,15 @@ public class BillDTO {
     String create_date;
     String payment_date;
     Long customer_id;
-    List<Long> book_ids;
+    List<BillDetailDTO> billDetails ;
+
+    public List<BillDetailDTO> getBillDetails() {
+        return billDetails;
+    }
+
+    public void setBillDetails(List<BillDetailDTO> billDetails) {
+        this.billDetails = billDetails;
+    }
 
     public Long getId() {
         return id;
@@ -44,15 +54,6 @@ public class BillDTO {
         this.payment_date = payment_date;
     }
 
-
-    public List<Long> getBook_ids() {
-        return book_ids;
-    }
-
-    public void setBook_ids(List<Long> book_ids) {
-        this.book_ids = book_ids;
-    }
-
     @Override
     public String toString() {
         return "BillDTO{" +
@@ -60,7 +61,7 @@ public class BillDTO {
                 ", create_date='" + create_date + '\'' +
                 ", payment_date='" + payment_date + '\'' +
                 ", customer_id=" + customer_id +
-                ", book_ids=" + book_ids +
+                ", billDetails=" + billDetails +
                 '}';
     }
 }
