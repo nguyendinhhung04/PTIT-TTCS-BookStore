@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "customer")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class User implements Serializable {
+public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -26,7 +26,7 @@ public class User implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     List<Receipt> receipt_list;
 
 
@@ -38,10 +38,6 @@ public class User implements Serializable {
     public void setReceipt_list(List<Receipt> receipt_list) {
         this.receipt_list = receipt_list;
     }
-
-
-
-
 
 
 
@@ -103,13 +99,10 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public void UserAdded() {
-
-    }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Customer{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", fullname='" + fullname + '\'' +

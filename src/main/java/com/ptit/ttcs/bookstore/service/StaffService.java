@@ -18,4 +18,20 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
+    public Staff findById(Long id) {
+        return staffRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Staff not found with id: " + id));
+    }
+
+    public Staff save(Staff staff) {
+        return staffRepository.save(staff);
+    }
+
+    public boolean checkUsernameExists(String username) {
+        return staffRepository.existsByUsername(username);
+    }
+
+    public void deleteById(Long id) {
+        staffRepository.deleteById(id);
+    }
 }

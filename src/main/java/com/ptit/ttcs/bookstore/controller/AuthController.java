@@ -38,7 +38,7 @@ public class AuthController {
         String role = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()
-                .orElse(Role.ORDER_MANAGER.name());
+                .orElse(Role.CASHIER.name());
 
         String jwt = jwtTokenUtil.generateToken(userDetails);
 

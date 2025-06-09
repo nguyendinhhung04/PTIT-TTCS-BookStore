@@ -37,6 +37,7 @@ public class BookDTO {
     String code;
 
     int quantity;
+    
 
     public int getQuantity() {
         return quantity;

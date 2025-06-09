@@ -24,6 +24,7 @@ public class Compose implements Serializable {
     @JoinColumn(name = "book_id")
     Book book;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "author_id")
     Author author;

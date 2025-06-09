@@ -29,7 +29,7 @@ public class Author implements Serializable {
     @Column(columnDefinition = "TEXT")
     String introduction;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "author")
     List<Compose> composes;
 

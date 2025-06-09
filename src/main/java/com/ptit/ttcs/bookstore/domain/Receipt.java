@@ -21,8 +21,8 @@ public class Receipt implements Serializable {
     String payment_date;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    User user;
+    @JoinColumn(name="customer_id")
+    Customer customer;
 
     @OneToMany(mappedBy = "receipt")
     List<ReceiptDetail> receiptDetails;
@@ -51,12 +51,12 @@ public class Receipt implements Serializable {
         this.payment_date = payment_date;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getUser() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Customer customer) {
+        this.customer = customer;
     }
 
     public List<ReceiptDetail> getReceiptDetails() {
@@ -73,7 +73,7 @@ public class Receipt implements Serializable {
                 "id=" + id +
                 ", create_date='" + create_date + '\'' +
                 ", payment_date='" + payment_date + '\'' +
-                ", user=" + user +
+                ", customer=" + customer +
                 ", receiptDetails=" + receiptDetails +
                 '}';
     }

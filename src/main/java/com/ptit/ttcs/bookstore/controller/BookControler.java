@@ -3,12 +3,9 @@ package com.ptit.ttcs.bookstore.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ptit.ttcs.bookstore.JsonViews.View;
-import com.ptit.ttcs.bookstore.domain.Book;
-import com.ptit.ttcs.bookstore.domain.Compose;
-import com.ptit.ttcs.bookstore.domain.CoverImage;
+import com.ptit.ttcs.bookstore.domain.*;
 import com.ptit.ttcs.bookstore.domain.DTO.Book.BookDTO;
 import com.ptit.ttcs.bookstore.domain.Mapper.BookMapper;
-import com.ptit.ttcs.bookstore.domain.Publisher;
 import com.ptit.ttcs.bookstore.repository.ComposeRepository;
 import com.ptit.ttcs.bookstore.repository.CoverImageRepository;
 import com.ptit.ttcs.bookstore.service.AuthorService;
@@ -78,6 +75,7 @@ public class BookControler {
         newBook.setComposes(composes);
 
         bookService.save(newBook);
+
     }
 
     @GetMapping("/admin/resource/book/{id}")
@@ -98,5 +96,42 @@ public class BookControler {
         }
         coverImageRepository.deleteById(book.getCoverImage().getId());
         bookService.deleteBook(id);
+    }
+
+//    @PutMapping("/admin/resource/book/update/")
+//    public void updateBookInfo( @RequestPart("bookInfo") BookDTO bookDTO, @RequestPart("inputImg") MultipartFile inputImg) throws IOException {
+//        Book book = BookMapper.INSTANCE.toBook(bookDTO);
+////        bookService.save(book);
+//        System.out.println(book);
+//        System.out.println(inputImg);
+//    }
+
+    @PostMapping("/admin/resource/book/updateInfo")
+    public void updateBookInfo(@RequestBody BookDTO bookDTO) {
+        Book book = BookMapper.INSTANCE.toBook(bookDTO);
+
+        List<Compose> composes = new ArrayList<Compose>();
+        for (Long authorId : bookDTO.getAuthor_ids()) {
+            composes.add(authorService.getComposesById(authorId));
+        }
+        book.setComposes(composes);
+        Publisher publisher = publisherService.getPublisherById(bookDTO.getPublisher_id());
+        book.setPublisher(publisher);
+        bookService.save(book);
+    }
+
+    @PostMapping("/admin/resource/book/uploadImg/{id}")
+    public void uploadImg(@PathVariable Long id, @RequestPart MultipartFile inputImg) throws IOException
+    {
+        String fileName = inputImg.getOriginalFilename();
+        String fileType = inputImg.getContentType();
+        byte[] data = inputImg.getBytes();
+
+        CoverImage coverImg = new CoverImage();
+        coverImg.setData(data);
+        coverImg.setType(fileType);
+        coverImg.setId(id);
+
+        CoverImage new_image = coverImageRepository.save(coverImg);
     }
 }

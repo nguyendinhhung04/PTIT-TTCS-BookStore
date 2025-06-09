@@ -2,7 +2,6 @@ package com.ptit.ttcs.bookstore.security.config;
 
 public enum Role {
     ADMIN,
-    ORDER_MANAGER,
+    CASHIER,
     STORE_MANAGER,
-    SELLER
 }
