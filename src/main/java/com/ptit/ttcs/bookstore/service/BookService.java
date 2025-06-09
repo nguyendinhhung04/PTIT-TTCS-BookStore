@@ -38,6 +38,12 @@ public class BookService {
         this.bookRepository.deleteById(id);
     }
 
+    public List<Book> findBookOnSale() {
+        return this.bookRepository.findByOnSaleTrue();
+    }
 
+    public Book findBookByCode(String code) {
+        return this.bookRepository.findByCode(code);
+    }
 
 }

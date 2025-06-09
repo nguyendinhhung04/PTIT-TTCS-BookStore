@@ -63,6 +63,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/admin/resource/book/**").permitAll()
+                    .requestMatchers("/admin/resource/book/code/**").permitAll()
                     .requestMatchers("/admin/resource/book/create").authenticated()
                     .requestMatchers("/admin/resource/category/all").permitAll()
                     .requestMatchers("/admin/resource/language/all").permitAll()

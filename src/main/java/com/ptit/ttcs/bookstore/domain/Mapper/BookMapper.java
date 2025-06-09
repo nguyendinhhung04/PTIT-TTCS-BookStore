@@ -33,6 +33,7 @@ public interface BookMapper {
         book.setComposes(null);
         book.setCode(bookDTO.getCode());
         book.setQuantity( bookDTO.getQuantity());
+        book.setOnSale( bookDTO.isOnSale() );
         return book;
     }
 
@@ -57,6 +58,7 @@ public interface BookMapper {
         bookDTO.setAuthor_ids(book.getComposes().stream().map(compose -> compose.getAuthor().getId()).toList());
         bookDTO.setCode(book.getCode());
         bookDTO.setQuantity(book.getQuantity());
+        bookDTO.setOnSale(book.isOnSale());
         return bookDTO;
     }
 }

@@ -27,16 +27,16 @@ public class Customer implements Serializable {
 
 
     @OneToMany(mappedBy = "customer")
-    List<Receipt> receipt_list;
+    List<Bill> bill_list;
 
 
 
-    public List<Receipt> getReceipt_list() {
-        return receipt_list;
+    public List<Bill> getReceipt_list() {
+        return bill_list;
     }
 
-    public void setReceipt_list(List<Receipt> receipt_list) {
-        this.receipt_list = receipt_list;
+    public void setReceipt_list(List<Bill> bill_list) {
+        this.bill_list = bill_list;
     }
 
 
@@ -110,7 +110,7 @@ public class Customer implements Serializable {
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", receipt_list=" + receipt_list +
+                ", receipt_list=" + bill_list +
                 '}';
     }
 }

@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="receipt_detail")
+@Table(name="bill_detail")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class ReceiptDetail implements Serializable {
+public class BillDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -19,12 +19,20 @@ public class ReceiptDetail implements Serializable {
     Float price;
 
     @ManyToOne
-    @JoinColumn(name="receipt_id")
-    Receipt receipt;
+    @JoinColumn(name="bill_id")
+    Bill bill;
 
     @ManyToOne
     @JoinColumn(name="book_id")
     Book book;
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
 
     public Long getId() {
         return id;
@@ -50,14 +58,6 @@ public class ReceiptDetail implements Serializable {
         this.price = price;
     }
 
-    public Receipt getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
-
     public Book getBook() {
         return book;
     }
@@ -68,11 +68,11 @@ public class ReceiptDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "ReceiptDetail{" +
+        return "BillDetail{" +
                 "id=" + id +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", receipt=" + receipt +
+                ", bill=" + bill +
                 ", book=" + book +
                 '}';
     }

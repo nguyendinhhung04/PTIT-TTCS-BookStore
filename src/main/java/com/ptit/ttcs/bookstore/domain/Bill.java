@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="receipt")
+@Table(name="bill")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Receipt implements Serializable {
+public class Bill implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,8 +24,8 @@ public class Receipt implements Serializable {
     @JoinColumn(name="customer_id")
     Customer customer;
 
-    @OneToMany(mappedBy = "receipt")
-    List<ReceiptDetail> receiptDetails;
+//    @OneToMany(mappedBy = "bill")
+//    List<BillDetail> billDetails;
 
     public Long getId() {
         return id;
@@ -59,22 +59,22 @@ public class Receipt implements Serializable {
         this.customer = customer;
     }
 
-    public List<ReceiptDetail> getReceiptDetails() {
-        return receiptDetails;
-    }
-
-    public void setReceiptDetails(List<ReceiptDetail> receiptDetails) {
-        this.receiptDetails = receiptDetails;
-    }
+//    public List<BillDetail> getBillDetails() {
+//        return billDetails;
+//    }
+//
+//    public void setBillDetails(List<BillDetail> billDetails) {
+//        this.billDetails = billDetails;
+//    }
 
     @Override
     public String toString() {
-        return "Receipt{" +
+        return "Bill{" +
                 "id=" + id +
                 ", create_date='" + create_date + '\'' +
                 ", payment_date='" + payment_date + '\'' +
                 ", customer=" + customer +
-                ", receiptDetails=" + receiptDetails +
+//                ", billDetails=" + billDetails +
                 '}';
     }
 }

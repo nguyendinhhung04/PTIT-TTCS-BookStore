@@ -37,7 +37,16 @@ public class BookDTO {
     String code;
 
     int quantity;
-    
+
+    boolean onSale;
+
+    public boolean isOnSale() {
+        return onSale;
+    }
+
+    public void setOnSale(boolean onSale) {
+        this.onSale = onSale;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -177,6 +186,7 @@ public class BookDTO {
                 ", coverImage=" + coverImage +
                 ", code='" + code + '\'' +
                 ", quantity=" + quantity +
+                ", onSale=" + onSale +
                 '}';
     }
 }

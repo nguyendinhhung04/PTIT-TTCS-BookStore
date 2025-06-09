@@ -40,13 +40,32 @@ public class BookControler {
 
     @GetMapping("/admin/resource/book/all")
     public List<BookDTO> viewBook() {
-        System.out.println("Access form frontend");
         List<BookDTO> bookDTOs = new ArrayList<BookDTO>();
         List<Book> books = bookService.findAllBook();
         for( Book book : books) {
             bookDTOs.add( BookMapper.INSTANCE.toBookDTO(book));
         }
         return bookDTOs;
+    }
+
+    @GetMapping("/admin/resource/book/onSale")
+    public List<BookDTO> viewOnSaleBook() {
+        List<BookDTO> bookDTOs = new ArrayList<BookDTO>();
+        List<Book> books = bookService.findBookOnSale();
+        for( Book book : books) {
+            bookDTOs.add( BookMapper.INSTANCE.toBookDTO(book));
+        }
+        return bookDTOs;
+    }
+
+    @GetMapping("/admin/resource/book/code/{code}")
+    public BookDTO getBookByCode(@PathVariable String code) {
+        Book book = bookService.findBookByCode(code);
+        if (book != null) {
+            return BookMapper.INSTANCE.toBookDTO(book);
+        } else {
+            return null; // Hoặc ném một exception nếu không tìm thấy sách
+        }
     }
 
     @PostMapping("/admin/resource/book/create")
@@ -134,4 +153,6 @@ public class BookControler {
 
         CoverImage new_image = coverImageRepository.save(coverImg);
     }
+
+
 }

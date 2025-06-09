@@ -23,6 +23,7 @@ public class Book implements Serializable {
     float price;
     Integer age_limit;
     float discount;
+    boolean onSale;
 
     @Column(columnDefinition = "TEXT")
     String introduction;
@@ -42,9 +43,6 @@ public class Book implements Serializable {
     @OneToMany(mappedBy = "book")
     List<Compose> composes;
 
-//    @OneToMany(mappedBy = "book")
-//    List<ReceiptDetail> receiptDetails;
-
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     Publisher publisher;
@@ -52,6 +50,14 @@ public class Book implements Serializable {
     @OneToOne()
     @JoinColumn(name="coverImage_id", referencedColumnName = "id")
     private CoverImage coverImage;
+
+    public boolean isOnSale() {
+        return onSale;
+    }
+
+    public void setOnSale(boolean onSale) {
+        this.onSale = onSale;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -189,6 +195,7 @@ public class Book implements Serializable {
                 ", category=" + category +
                 ", language=" + language +
                 ", publisher=" + publisher +
+                ", onSale: =" + onSale +
                 '}';
     }
 }
