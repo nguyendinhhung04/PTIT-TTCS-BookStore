@@ -82,7 +82,7 @@ public class BillService {
         billDTO.setId(bill.getId());
         billDTO.setCreate_date(bill.getCreate_date());
         billDTO.setPayment_date(bill.getPayment_date());
-        billDTO.setCustomer_name(bill.getUser().getFullname());
+        billDTO.setCustomer(bill.getUser());
 
         List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
         List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());
@@ -103,7 +103,7 @@ public class BillService {
             billDTO.setId(bill.getId());
             billDTO.setCreate_date(bill.getCreate_date());
             billDTO.setPayment_date(bill.getPayment_date());
-            billDTO.setCustomer_name(bill.getUser().getFullname());
+            billDTO.setCustomer(bill.getUser());
 
             List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
             List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());
