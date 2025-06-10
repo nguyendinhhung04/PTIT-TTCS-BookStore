@@ -42,7 +42,7 @@ public class BillService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void addBill(BillDTO billDTO) {
+    public Bill addBill(BillDTO billDTO) {
         // Validate input
         if (billDTO == null || billDTO.getCustomer_id() == null ||
                 billDTO.getBillDetails() == null || billDTO.getBillDetails().isEmpty()) {
@@ -73,6 +73,7 @@ public class BillService {
             billDetail.setBook(bookService.findBookById(detailDTO.getBookId()));
             billDetailRepository.save(billDetail);
         }
+        return savedBill;
     }
 
     public billFeDTO getBillById(Long id) {

@@ -1,5 +1,6 @@
 package com.ptit.ttcs.bookstore.controller;
 
+import com.ptit.ttcs.bookstore.domain.Bill;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billFeDTO;
 import com.ptit.ttcs.bookstore.service.BillService;
@@ -19,8 +20,9 @@ public class BillController {
     }
 
     @PostMapping("/admin/resource/bill/confirm")
-    public void confirmBill(@RequestBody BillDTO billDTO) {
-        billService.addBill(billDTO);
+    public Long confirmBill(@RequestBody BillDTO billDTO) {
+        Bill bill = billService.addBill(billDTO);
+        return bill.getId();
     }
 
     @GetMapping("/admin/resource/bill/{id}")
