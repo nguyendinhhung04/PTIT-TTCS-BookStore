@@ -5,6 +5,8 @@ import com.ptit.ttcs.bookstore.domain.BillDetail;
 import com.ptit.ttcs.bookstore.domain.Customer;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDetailDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billDetailFeDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billFeDTO;
 import com.ptit.ttcs.bookstore.domain.Mapper.BillDetailMapper;
 import com.ptit.ttcs.bookstore.repository.BillDetailRepository;
 import com.ptit.ttcs.bookstore.repository.BillRepository;
@@ -34,8 +36,12 @@ public class BillService {
         return billDetailRepository.save(billDetail);
     }
 
+    public List<BillDetail> getDetailsOfBill(Long billId) {
+        return billDetailRepository.findAllByBillId(billId);           //check
+    }
+
     @Transactional(rollbackFor = Exception.class)
-    public Bill addBill(BillDTO billDTO) {
+    public void addBill(BillDTO billDTO) {
         // Validate input
         if (billDTO == null || billDTO.getCustomer_id() == null ||
                 billDTO.getBillDetails() == null || billDTO.getBillDetails().isEmpty()) {
@@ -57,17 +63,59 @@ public class BillService {
 
         // Save bill details
         for (BillDetailDTO detailDTO : billDTO.getBillDetails()) {
-            if (detailDTO.getBook_id() == null) {
+            if (detailDTO.getBookId() == null) {
                 throw new IllegalArgumentException("Book ID cannot be null");
             }
 
             BillDetail billDetail = BillDetailMapper.INSTANCE.toBillDetail(detailDTO);
             billDetail.setBill(savedBill);
-            billDetail.setBook(bookService.findBookById(detailDTO.getBook_id()));
+            billDetail.setBook(bookService.findBookById(detailDTO.getBookId()));
             billDetailRepository.save(billDetail);
         }
+    }
 
-        return savedBill;
+    public billFeDTO getBillById(Long id) {
+        Bill bill = billRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bill not found with id: " + id));
+
+        billFeDTO billDTO = new billFeDTO();
+        billDTO.setId(bill.getId());
+        billDTO.setCreate_date(bill.getCreate_date());
+        billDTO.setPayment_date(bill.getPayment_date());
+        billDTO.setCustomer_name(bill.getUser().getFullname());
+
+        List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
+        List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());
+        for( BillDetail detail : billDetails) {
+            billDetailFeDTO detailDTO = BillDetailMapper.INSTANCE.toBillDetailDTO(detail);
+            billDetailDTOs.add(detailDTO);
+        }
+        billDTO.setBillDetailsFe(billDetailDTOs);
+        System.out.println("Here");
+        return billDTO;
+    }
+
+    public List<billFeDTO> getAllBills(){
+        List<Bill> bills = billRepository.findAll();
+        List<billFeDTO> billDTOs = new ArrayList<>();
+        for (Bill bill : bills) {
+            billFeDTO billDTO = new billFeDTO();
+            billDTO.setId(bill.getId());
+            billDTO.setCreate_date(bill.getCreate_date());
+            billDTO.setPayment_date(bill.getPayment_date());
+            billDTO.setCustomer_name(bill.getUser().getFullname());
+
+            List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
+            List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());
+            for( BillDetail detail : billDetails) {
+                billDetailFeDTO detailDTO = BillDetailMapper.INSTANCE.toBillDetailDTO(detail);
+                billDetailDTOs.add(detailDTO);
+            }
+            billDTO.setBillDetailsFe(billDetailDTOs);
+            billDTOs.add(billDTO);
+        }
+        System.out.println("Hello");
+        return billDTOs;
     }
 
 }

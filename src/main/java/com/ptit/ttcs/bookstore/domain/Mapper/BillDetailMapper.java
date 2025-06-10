@@ -3,6 +3,10 @@ package com.ptit.ttcs.bookstore.domain.Mapper;
 import com.ptit.ttcs.bookstore.domain.BillDetail;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDetailDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billFeDTO;
+import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billDetailFeDTO;
+
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -21,5 +25,16 @@ public interface BillDetailMapper {
         return billDetail;
     }
 
+    default billDetailFeDTO toBillDetailDTO(BillDetail billDetail) {
+        if (billDetail == null) {
+            return null;
+        }
+        billDetailFeDTO billDetailDTO = new billDetailFeDTO();
+        billDetailDTO.setBookName( billDetail.getBook().getBook_name());
+        billDetailDTO.setCode(billDetail.getBook().getCode());
+        billDetailDTO.setQuantity(billDetail.getQuantity());
+        billDetailDTO.setPrice(billDetail.getPrice());
+        return billDetailDTO;
+    }
 
 }

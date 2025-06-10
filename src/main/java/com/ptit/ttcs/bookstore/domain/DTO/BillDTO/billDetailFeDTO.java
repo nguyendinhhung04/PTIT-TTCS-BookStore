@@ -1,20 +1,26 @@
 package com.ptit.ttcs.bookstore.domain.DTO.BillDTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class billDetailFeDTO {
 
-public class BillDetailDTO {
-
-    Long bookId;
+    String bookName;
+    String code;
     Float price;
     Integer quantity;
 
-
-    public Long getBookId() {
-        return bookId;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Float getPrice() {
@@ -35,8 +41,9 @@ public class BillDetailDTO {
 
     @Override
     public String toString() {
-        return "BillDetailDTO{" +
-                "bookId=" + bookId +
+        return "billDetailFeDTO{" +
+                "bookName='" + bookName + '\'' +
+                ", code='" + code + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';

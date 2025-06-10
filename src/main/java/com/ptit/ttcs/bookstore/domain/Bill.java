@@ -24,9 +24,6 @@ public class Bill implements Serializable {
     @JoinColumn(name="customer_id")
     Customer customer;
 
-//    @OneToMany(mappedBy = "bill")
-//    List<BillDetail> billDetails;
-
     public Long getId() {
         return id;
     }
