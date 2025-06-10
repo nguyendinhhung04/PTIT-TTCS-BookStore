@@ -18,7 +18,7 @@ public interface PublisherMapper {
         Publisher publisher = new Publisher();
         publisher.setId(publisherDTO.getId());
         publisher.setName(publisherDTO.getName());
-        publisher.setBooks(publisherDTO.getBooks());
+//        publisher.setBooks(publisherDTO.getBooks());
         return publisher;
     }
 
@@ -30,7 +30,7 @@ public interface PublisherMapper {
         PublisherDTO publisherDTO = new PublisherDTO();
         publisherDTO.setId(publisher.getId());
         publisherDTO.setName(publisher.getName());
-        publisherDTO.setBooks(publisher.getBooks());
+//        publisherDTO.setBooks(publisher.getBooks());
         return publisherDTO;
     }
 

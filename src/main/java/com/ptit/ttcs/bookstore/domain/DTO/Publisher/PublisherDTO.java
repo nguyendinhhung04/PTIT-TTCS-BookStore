@@ -9,7 +9,7 @@ public class PublisherDTO {
 
     Long id;
     String name;
-    List<Book> books;
+//    List<Book> books;
 
     public Long getId() {
         return id;
@@ -27,20 +27,19 @@ public class PublisherDTO {
         this.name = name;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
+//    public List<Book> getBooks() {
+//        return books;
+//    }
+//
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
+//    }
 
     @Override
     public String toString() {
         return "PublisherDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", books=" + books +
                 '}';
     }
 }

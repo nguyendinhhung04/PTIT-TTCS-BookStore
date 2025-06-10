@@ -41,4 +41,11 @@ public class PublisherController {
     public void deletePublisher(@PathVariable Long id) {
         publisherService.deletePublisher(id);
     }
+
+    @PostMapping("/admin/resource/publisher/create")
+    public PublisherDTO createPublisher(@RequestBody PublisherDTO publisherDTO) {
+        Publisher publisher = PublisherMapper.INSTANCE.toPublisher(publisherDTO);
+        Publisher savedPublisher = publisherService.createPublisher(publisher);
+        return PublisherMapper.INSTANCE.toDTO(savedPublisher);
+    }
 }

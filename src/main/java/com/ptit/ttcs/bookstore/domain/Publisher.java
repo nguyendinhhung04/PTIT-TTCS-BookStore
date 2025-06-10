@@ -21,8 +21,8 @@ public class Publisher implements Serializable {
     Long id;
     String name;
 
-    @OneToMany(mappedBy = "publisher")
-    List<Book> books;
+//    @OneToMany(mappedBy = "publisher")
+//    List<Book> books;
 
     public Long getId() {
         return id;
@@ -40,20 +40,13 @@ public class Publisher implements Serializable {
         this.name = name;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
 
     @Override
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", books=" + books +
                 '}';
     }
 }
