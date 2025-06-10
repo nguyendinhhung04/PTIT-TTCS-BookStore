@@ -1,6 +1,7 @@
 package com.ptit.ttcs.bookstore.domain.DTO.BillDTO;
 
 import com.ptit.ttcs.bookstore.domain.Customer;
+import com.ptit.ttcs.bookstore.domain.DTO.GetUserDTO;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class billFeDTO {
     Long id;
     String create_date;
     String payment_date;
-    Customer customer;
+    GetUserDTO customer;
     List<billDetailFeDTO> billDetailsFe ;
 
     public Long getId() {
@@ -36,11 +37,11 @@ public class billFeDTO {
         this.payment_date = payment_date;
     }
 
-    public Customer getCustomer() {
+    public GetUserDTO getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(GetUserDTO customer) {
         this.customer = customer;
     }
 

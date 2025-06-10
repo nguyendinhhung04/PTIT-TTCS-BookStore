@@ -8,6 +8,7 @@ import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.BillDetailDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billDetailFeDTO;
 import com.ptit.ttcs.bookstore.domain.DTO.BillDTO.billFeDTO;
 import com.ptit.ttcs.bookstore.domain.Mapper.BillDetailMapper;
+import com.ptit.ttcs.bookstore.domain.Mapper.UserInfoMapper;
 import com.ptit.ttcs.bookstore.repository.BillDetailRepository;
 import com.ptit.ttcs.bookstore.repository.BillRepository;
 import com.ptit.ttcs.bookstore.repository.CustomerRepository;
@@ -82,7 +83,7 @@ public class BillService {
         billDTO.setId(bill.getId());
         billDTO.setCreate_date(bill.getCreate_date());
         billDTO.setPayment_date(bill.getPayment_date());
-        billDTO.setCustomer(bill.getUser());
+        billDTO.setCustomer(UserInfoMapper.INSTANCE.userToGetUserDTO(bill.getUser()));
 
         List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
         List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());
@@ -103,7 +104,7 @@ public class BillService {
             billDTO.setId(bill.getId());
             billDTO.setCreate_date(bill.getCreate_date());
             billDTO.setPayment_date(bill.getPayment_date());
-            billDTO.setCustomer(bill.getUser());
+            billDTO.setCustomer(UserInfoMapper.INSTANCE.userToGetUserDTO(bill.getUser()));
 
             List<billDetailFeDTO> billDetailDTOs = new ArrayList<>();
             List<BillDetail> billDetails = this.getDetailsOfBill(bill.getId());

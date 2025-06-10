@@ -8,9 +8,7 @@ public class CreateUserDTO {
     String gender;
     String address;
     String email;
-    String password;
     String phone;
-    String username;
 
 
     public String getFullname() {
@@ -62,13 +60,6 @@ public class CreateUserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPhone() {
         return phone;
@@ -78,13 +69,7 @@ public class CreateUserDTO {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
     public String toString() {
@@ -94,9 +79,7 @@ public class CreateUserDTO {
                 ", gender='" + gender + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", username='" + username + '\'' +
                 '}';
     }
 }

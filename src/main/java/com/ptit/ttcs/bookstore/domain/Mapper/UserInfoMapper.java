@@ -31,6 +31,6 @@ public interface UserInfoMapper {
 
 
 
-    Customer CreateUserDTOToUser(CreateUserDTO createUserDTO);
+    Customer CreateUserDTOToUser(GetUserDTO getUserDTO);
 
 }

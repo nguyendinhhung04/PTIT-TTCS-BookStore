@@ -35,9 +35,11 @@ public class HomeController {
 
 
     @PostMapping("/user/create")
-    public void createUser(@RequestPart("userInput") CreateUserDTO createUserDTO) throws IOException {
-        Customer newCustomer = customerService.saveUser(UserInfoMapper.INSTANCE.CreateUserDTOToUser(createUserDTO));
-        customerService.saveUser(newCustomer);
+    public void createUser(@RequestBody GetUserDTO getUserDTO) throws IOException {
+        Customer customer= UserInfoMapper.INSTANCE.CreateUserDTOToUser(getUserDTO);
+        System.out.println("Here");
+        Customer newCustomer = customerService.saveUser( customer );
+        System.out.println("Here");
     }
 
     @PostMapping("/user/edit")

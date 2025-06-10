@@ -6,8 +6,6 @@ public class GetUserDTO {
     Long id;
     String fullname;
     String email;
-    String username;
-    String password;
     Integer age;
     String gender;
     String phone;
@@ -49,21 +47,7 @@ public class GetUserDTO {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Integer getAge() {
         return age;
@@ -103,8 +87,6 @@ public class GetUserDTO {
                 "id=" + id +
                 ", fullname='" + fullname + '\'' +
                 ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
