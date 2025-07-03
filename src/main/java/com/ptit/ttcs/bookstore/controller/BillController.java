@@ -19,7 +19,7 @@ public class BillController {
         this.billService = billService;
     }
 
-    @PostMapping("/admin/resource/bill/confirm")
+    @PostMapping("/admin/resource/bill/create")
     public Long confirmBill(@RequestBody BillDTO billDTO) {
         Bill bill = billService.addBill(billDTO);
         return bill.getId();
@@ -38,20 +38,11 @@ public class BillController {
         return billService.getAllBills();
     }
 
-//    @PostMapping("/admin/resource/bill/confirm")
-//    public ResponseEntity<?> confirmBill(@RequestBody BillDTO billDTO) {
-//        try {
-//            if (billDTO == null) {
-//                return ResponseEntity.badRequest().body("Bill data cannot be null");
-//            }
-//            billService.addBill(billDTO);
-//            return ResponseEntity.ok().build();
-//        } catch (IllegalArgumentException e) {
-//            return ResponseEntity.badRequest().body("Invalid bill data: " + e.getMessage());
-//        } catch (Exception e) {
-//            return ResponseEntity.internalServerError().body("Error processing bill: " + e.getMessage());
-//        }
-//    }
+    @GetMapping("/admin/resource/bill/{id}/confirmed")
+    public void confirmBillById(@PathVariable Long id) {
+        billService.confirmBill(id);
+
+    }
 
 
 }

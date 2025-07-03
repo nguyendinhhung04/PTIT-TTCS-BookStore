@@ -15,6 +15,7 @@ import com.ptit.ttcs.bookstore.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -118,6 +119,17 @@ public class BillService {
         }
         System.out.println("Hello");
         return billDTOs;
+    }
+
+    public void confirmBill(Long id) {
+        Bill bill = billRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bill not found with id: " + id));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = formatter.format(date);
+
+        bill.setPayment_date(formattedDate);
+        billRepository.save(bill);
     }
 
 }
